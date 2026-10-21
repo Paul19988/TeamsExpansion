@@ -6,7 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,34 +19,35 @@ public class TeamsExpansion extends PlaceholderExpansion {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "TeamsExpansion";
     }
 
     @Override
-    public @NotNull String getIdentifier() {
+    public String getIdentifier() {
         return "team";
     }
 
     @Override
-    public @NotNull String getAuthor() {
+    public String getAuthor() {
         return "PaulCodesUK";
     }
 
     @Override
-    public @NotNull String getVersion() {
+    public String getVersion() {
         return "0.1-SNAPSHOT";
     }
 
     @Override
-    public @NotNull List<String> getPlaceholders() {
+    public List<String> getPlaceholders() {
         List<String> list = new ArrayList<>();
         list.add(plc("color"));
         list.add(plc("prefix"));
         list.add(plc("suffix"));
+        list.add(plc("displayname"));
         list.add(plc("name"));
         list.add(plc("count"));
-        return super.getPlaceholders();
+        return list;
     }
 
     private static String getPlayerTeam(String player) {
@@ -117,10 +117,10 @@ public class TeamsExpansion extends PlaceholderExpansion {
                 return getTeamPrefix(getPlayerTeam(player.getName()));
             } else if (identifier.contains("suffix")) {
                 return getTeamSuffix(getPlayerTeam(player.getName()));
-            } else if (identifier.contains("name")) {
-                return getPlayerTeam(player.getName());
             } else if (identifier.contains("displayname")) {
                 return getDisplayName(getPlayerTeam(player.getName()));
+            } else if (identifier.contains("name")) {
+                return getPlayerTeam(player.getName());
             } else if (identifier.contains("count")) {
                 return getTeamCount(getPlayerTeam(player.getName())) + "";
             }
